@@ -4,7 +4,7 @@ import br.edu.aluno.projetofinal.auth.JWTAuthFilter;
 import br.edu.aluno.projetofinal.auth.token.TokenService;
 import br.edu.aluno.projetofinal.auth.token.models.TokenPayload;
 import br.edu.aluno.projetofinal.auth.user.UserAuthentication;
-import br.edu.aluno.projetofinal.auth.user.services.UserAuthService;
+import br.edu.aluno.projetofinal.auth.user.services.auth.UserAuthService;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

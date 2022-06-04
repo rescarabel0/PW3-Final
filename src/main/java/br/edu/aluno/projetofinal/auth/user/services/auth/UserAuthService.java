@@ -1,4 +1,4 @@
-package br.edu.aluno.projetofinal.auth.user.services;
+package br.edu.aluno.projetofinal.auth.user.services.auth;
 
 import br.edu.aluno.projetofinal.auth.user.dtos.AuthUserDTO;
 import org.springframework.lang.NonNull;

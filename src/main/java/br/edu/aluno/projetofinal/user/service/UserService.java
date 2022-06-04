@@ -1,4 +1,4 @@
-package br.edu.aluno.projetofinal.user.service.auth;
+package br.edu.aluno.projetofinal.user.service;
 
 import br.edu.aluno.projetofinal.user.domain.User;
 import org.springframework.lang.NonNull;
@@ -11,4 +11,6 @@ public interface UserService {
 
     @NonNull
     Optional<User> findByLogin(@NonNull String login);
+
+    Optional<User> save(@NonNull User user);
 }

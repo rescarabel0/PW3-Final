@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user", indexes = @Index(name = "app_user_login_idx", columnList = "login"))
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -18,8 +18,8 @@ import java.sql.Time;
 public class User {
     @Id
     @Column
-    @SequenceGenerator(name = "user_id_seq",
-            sequenceName = "user_id_seq",
+    @SequenceGenerator(name = "app_user_id_seq",
+            sequenceName = "app_user_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "user_id_seq")

@@ -1,8 +1,8 @@
-package br.edu.aluno.projetofinal.auth.user;
+package br.edu.aluno.projetofinal.auth.user.controller;
 
 import br.edu.aluno.projetofinal.auth.user.dtos.UserAuthRequestDTO;
 import br.edu.aluno.projetofinal.auth.user.dtos.UserAuthResponseDTO;
-import br.edu.aluno.projetofinal.user.service.login.UserLoginService;
+import br.edu.aluno.projetofinal.auth.user.services.login.UserLoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;

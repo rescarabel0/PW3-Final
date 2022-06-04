@@ -1,7 +1,7 @@
-package br.edu.aluno.projetofinal.auth.user.services;
+package br.edu.aluno.projetofinal.auth.user.services.auth;
 
 import br.edu.aluno.projetofinal.auth.user.dtos.AuthUserDTO;
-import br.edu.aluno.projetofinal.user.service.auth.UserService;
+import br.edu.aluno.projetofinal.user.service.UserService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;

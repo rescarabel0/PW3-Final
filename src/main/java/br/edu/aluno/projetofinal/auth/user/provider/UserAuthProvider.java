@@ -1,7 +1,7 @@
 package br.edu.aluno.projetofinal.auth.user.provider;
 
 import br.edu.aluno.projetofinal.auth.user.UserAuthentication;
-import br.edu.aluno.projetofinal.auth.user.services.UserAuthService;
+import br.edu.aluno.projetofinal.auth.user.services.auth.UserAuthService;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;

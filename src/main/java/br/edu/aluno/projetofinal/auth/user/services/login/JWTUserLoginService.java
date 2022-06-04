@@ -1,4 +1,4 @@
-package br.edu.aluno.projetofinal.user.service.login;
+package br.edu.aluno.projetofinal.auth.user.services.login;
 
 import br.edu.aluno.projetofinal.auth.token.TokenService;
 import br.edu.aluno.projetofinal.auth.token.models.Token;
