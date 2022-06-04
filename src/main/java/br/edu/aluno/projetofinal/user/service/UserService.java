@@ -12,5 +12,9 @@ public interface UserService {
     @NonNull
     Optional<User> findByLogin(@NonNull String login);
 
+    @NonNull
     Optional<User> save(@NonNull User user);
+
+    @NonNull
+    Optional<User> update(@NonNull User user) throws Throwable;
 }

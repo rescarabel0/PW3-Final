@@ -1,6 +1,5 @@
 package br.edu.aluno.projetofinal.device.domain;
 
-import br.edu.aluno.projetofinal.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -35,9 +34,4 @@ public class Device {
     @Column
     @Nullable
     private DeviceType type;
-
-    @JoinColumn
-    @ManyToOne
-    @Nullable
-    private User user;
 }
