@@ -16,5 +16,5 @@ public interface UserService {
     Optional<User> save(@NonNull User user);
 
     @NonNull
-    Optional<User> update(@NonNull User user) throws Throwable;
+    Optional<User> update(@NonNull Long userId, @NonNull User user) throws Throwable;
 }

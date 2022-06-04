@@ -5,12 +5,10 @@ import br.edu.aluno.projetofinal.user.dtos.UserDTO;
 import br.edu.aluno.projetofinal.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping({"/user"})
@@ -20,6 +18,18 @@ public class UserController {
 
     public UserController(@NonNull UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping({"/{id}/", "/{id}"})
+    @NonNull
+    public ResponseEntity<User> findOne(@NonNull @PathVariable Long id) {
+        try {
+            var foundUser = userService.findById(id);
+            if (foundUser.isEmpty()) return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(foundUser.get());
+        } catch (EntityNotFoundException ignored) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping({"/sign-up", "/sign-up/"})
@@ -32,5 +42,20 @@ public class UserController {
         } catch (EntityExistsException ignored) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @PutMapping({"/{id}", "/{id}/"})
+    @NonNull
+    public ResponseEntity<User> update(@NonNull @RequestBody UserDTO body, @NonNull @PathVariable Long id) {
+        try {
+
+            var updatedUser = userService.update(id, body.toDomain());
+            if (updatedUser.isEmpty()) return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(updatedUser.get());
+        } catch (EntityNotFoundException ignored) {
+            return ResponseEntity.notFound().build();
+        } catch (Throwable ignored) {
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

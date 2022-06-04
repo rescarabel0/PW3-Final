@@ -31,7 +31,7 @@ public class Room {
     @Nullable
     private String description;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Nullable
     @Setter
     private List<Device> devices;

@@ -30,7 +30,19 @@ public class DBRoomService implements RoomService {
     }
 
     @Override
-    public Optional<Room> addToEquipmentList(@NonNull Long roomId, @NonNull Device device) {
+    public Optional<Room> findOne(@NonNull Long id) {
+        return roomRepository.findById(id);
+    }
+
+    @Override
+    public void delete(@NonNull Long id) {
+        var optionalFoundRoom = findOne(id);
+        if (optionalFoundRoom.isEmpty()) throw new EntityNotFoundException();
+        roomRepository.delete(optionalFoundRoom.get());
+    }
+
+    @Override
+    public Optional<Room> addToDeviceList(@NonNull Long roomId, @NonNull Device device) {
         var optionalFoundRoom = roomRepository.findById(roomId);
         if (optionalFoundRoom.isEmpty()) throw new EntityNotFoundException();
         if (optionalFoundRoom.get().getDevices() == null) optionalFoundRoom.get().setDevices(List.of(device));

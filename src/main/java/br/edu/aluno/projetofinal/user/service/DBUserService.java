@@ -39,9 +39,8 @@ public class DBUserService implements UserService {
     }
 
     @Override
-    public Optional<User> update(@NonNull User user) throws Throwable {
-        if (user.getId() == null) throw new MissingRequestValueException("Usuário inválido. Falta id.");
-        var optionalFoundUser = userRepository.findById(user.getId());
+    public Optional<User> update(@NonNull Long userId, @NonNull User user) throws Throwable {
+        var optionalFoundUser = userRepository.findById(userId);
         if (optionalFoundUser.isEmpty()) throw new EntityNotFoundException();
         var foundUser = optionalFoundUser.get();
 

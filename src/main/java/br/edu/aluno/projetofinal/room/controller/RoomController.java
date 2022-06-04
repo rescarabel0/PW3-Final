@@ -27,11 +27,31 @@ public class RoomController {
         return ResponseEntity.ok(roomService.findAll());
     }
 
+    @GetMapping({"/{id}", "/{id}/"})
+    @NonNull
+    public ResponseEntity<Room> getOne(@NonNull @PathVariable Long id) {
+        var foundRoom = roomService.findOne(id);
+        if (foundRoom.isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(foundRoom.get());
+    }
+
+    @DeleteMapping({"/{id}", "/{id}/"})
+    @NonNull
+    public ResponseEntity<?> delete(@NonNull @PathVariable Long id) {
+        try {
+            roomService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException ignored) {
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
     @PutMapping({"/devices/add/{id}", "/devices/add/{id}/"})
     @NonNull
     public ResponseEntity<Room> addToEquipmentsList(@NonNull @PathVariable Long id, @NonNull @RequestBody Device device) {
         try {
-            var room = roomService.addToEquipmentList(id, device);
+            var room = roomService.addToDeviceList(id, device);
             if (room.isEmpty()) return ResponseEntity.badRequest().build();
             return ResponseEntity.ok(room.get());
         } catch (EntityNotFoundException ignored) {

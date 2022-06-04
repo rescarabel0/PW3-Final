@@ -1,8 +1,6 @@
 package br.edu.aluno.projetofinal.device.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -12,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class Device {
     @Id
     @Column
@@ -25,13 +24,16 @@ public class Device {
 
     @Column
     @Nullable
+    @Setter
     private String model;
 
     @Column
     @Nullable
+    @Setter
     private String manufacturer;
 
     @Column
     @Nullable
+    @Setter
     private DeviceType type;
 }

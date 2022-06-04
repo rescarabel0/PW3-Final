@@ -15,5 +15,11 @@ public interface RoomService {
     List<Room> findAll();
 
     @NonNull
-    Optional<Room> addToEquipmentList(@NonNull Long roomId, @NonNull Device devices);
+    Optional<Room> findOne(@NonNull Long id);
+
+    @NonNull
+    void delete(@NonNull Long id);
+
+    @NonNull
+    Optional<Room> addToDeviceList(@NonNull Long roomId, @NonNull Device devices);
 }
