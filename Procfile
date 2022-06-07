@@ -1,1 +1,1 @@
-web: mvn clean package && java -jar target/ProjetoFinal-0.0.1.jar
+web: java -jar target/ProjetoFinal-0.0.1.jar
