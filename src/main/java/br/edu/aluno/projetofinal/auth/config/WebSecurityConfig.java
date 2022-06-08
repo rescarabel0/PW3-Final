@@ -52,4 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(userAuthConfig.getUserAuthFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
+
 }

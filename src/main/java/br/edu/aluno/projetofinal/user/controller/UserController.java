@@ -12,6 +12,7 @@ import javax.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping({"/user"})
+@CrossOrigin(origins = {"*"})
 public class UserController {
     @NonNull
     private final UserService userService;

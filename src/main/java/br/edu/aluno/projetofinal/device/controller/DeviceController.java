@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/device"})
+@CrossOrigin(origins = {"*"})
 public class DeviceController {
     @NonNull
     private final DeviceService deviceService;
