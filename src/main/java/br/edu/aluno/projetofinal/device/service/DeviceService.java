@@ -15,5 +15,8 @@ public interface DeviceService {
     Optional<Device> update(@NonNull Device device, @NonNull Long deviceId) throws Throwable;
 
     @NonNull
+    Optional<Device> save(@NonNull Device device) throws Throwable;
+
+    @NonNull
     void deleteByID(@NonNull Long deviceId) throws EntityNotFoundException;
 }

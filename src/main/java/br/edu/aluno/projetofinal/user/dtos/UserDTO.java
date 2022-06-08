@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
-import java.sql.Time;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,20 +20,13 @@ public class UserDTO {
     private String password;
 
     @NonNull
-    private Time routineStartsAt;
+    private String routineStartsAt;
 
     @NonNull
-    private Time routineEndsAt;
+    private String routineEndsAt;
 
     @NonNull
     public User toDomain() {
-        return new User(
-                null,
-                this.name,
-                this.login,
-                this.password,
-                this.routineStartsAt,
-                this.routineEndsAt
-        );
+        return new User(null, this.name, this.login, this.password, this.routineStartsAt, this.routineEndsAt);
     }
 }

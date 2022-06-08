@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .anyRequest().authenticated();
 
+        http.cors();
         http.addFilterBefore(userAuthConfig.getUserAuthFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

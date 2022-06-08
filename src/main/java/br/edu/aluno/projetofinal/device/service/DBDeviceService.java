@@ -46,6 +46,11 @@ public class DBDeviceService implements DeviceService {
     }
 
     @Override
+    public Optional<Device> save(Device device) throws Throwable {
+        return Optional.of(deviceRepository.save(device));
+    }
+
+    @Override
     public void deleteByID(@NonNull Long deviceId) throws EntityNotFoundException {
         var optionalFoundDevice = deviceRepository.findById(deviceId);
         if (optionalFoundDevice.isEmpty()) throw new EntityNotFoundException();

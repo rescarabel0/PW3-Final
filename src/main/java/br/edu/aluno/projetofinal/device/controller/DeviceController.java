@@ -24,6 +24,17 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.findAll());
     }
 
+    @PostMapping({"", "/"})
+    public ResponseEntity<?> save(@NonNull @RequestBody Device device) {
+        try {
+            var deviceRes = deviceService.save(device);
+            if (deviceRes.isEmpty()) return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(deviceRes.get());
+        } catch (Throwable ignored) {
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
     @DeleteMapping({"/{id}", "/{id}/"})
     @NonNull
     public ResponseEntity<?> delete(@NonNull @PathVariable Long id) {

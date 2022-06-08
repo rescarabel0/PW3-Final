@@ -1,6 +1,7 @@
 package br.edu.aluno.projetofinal.room.service;
 
 import br.edu.aluno.projetofinal.device.domain.Device;
+import br.edu.aluno.projetofinal.device.service.DeviceService;
 import br.edu.aluno.projetofinal.room.domain.Room;
 import br.edu.aluno.projetofinal.room.repository.RoomRepository;
 import org.springframework.lang.NonNull;
@@ -14,9 +15,12 @@ import java.util.Optional;
 public class DBRoomService implements RoomService {
     @NonNull
     private final RoomRepository roomRepository;
+    @NonNull
+    private final DeviceService deviceService;
 
-    public DBRoomService(@NonNull RoomRepository roomRepository) {
+    public DBRoomService(@NonNull RoomRepository roomRepository, @NonNull DeviceService deviceService) {
         this.roomRepository = roomRepository;
+        this.deviceService = deviceService;
     }
 
     @Override

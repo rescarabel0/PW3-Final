@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
 @Table(name = "app_user", indexes = @Index(name = "app_user_login_idx", columnList = "login"))
@@ -41,10 +40,10 @@ public class User {
     @Nullable
     @Column
     @Setter
-    private Time routineStartsAt;
+    private String routineStartsAt;
 
     @Nullable
     @Column
     @Setter
-    private Time routineEndsAt;
+    private String routineEndsAt;
 }
