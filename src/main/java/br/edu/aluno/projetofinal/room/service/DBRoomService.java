@@ -7,6 +7,8 @@ import br.edu.aluno.projetofinal.user.domain.User;
 import br.edu.aluno.projetofinal.user.service.UserService;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MissingRequestValueException;
 
 import javax.naming.AuthenticationException;
 import javax.persistence.EntityNotFoundException;
@@ -45,6 +47,7 @@ public class DBRoomService implements RoomService {
     }
 
     @Override
+    @Transactional
     public void delete(@NonNull Long id) {
         var optionalFoundRoom = findOne(id);
         if (optionalFoundRoom.isEmpty()) throw new EntityNotFoundException();
@@ -52,12 +55,28 @@ public class DBRoomService implements RoomService {
     }
 
     @Override
+    @Transactional
     public Optional<Room> addToDeviceList(@NonNull Long roomId, @NonNull Device device) {
         var optionalFoundRoom = roomRepository.findById(roomId);
         if (optionalFoundRoom.isEmpty()) throw new EntityNotFoundException();
-        if (optionalFoundRoom.get().getDevices() == null) optionalFoundRoom.get().setDevices(List.of(device));
-        else optionalFoundRoom.get().getDevices().add(device);
-        return Optional.of(roomRepository.save(optionalFoundRoom.get()));
+        var room = optionalFoundRoom.get();
+        var currentDevices = room.getDevices();
+        if (currentDevices == null) room.setDevices(List.of(device));
+        else if (!currentDevices.contains(device)) {
+            currentDevices.add(device);
+            device.setRoom(room);
+            room.setDevices(currentDevices);
+        }
+        return Optional.of(roomRepository.save(room));
+    }
+
+    @Override
+    public void removeFromDeviceList(Room room, Device device) throws MissingRequestValueException {
+        var currentDevices = room.getDevices();
+        if (currentDevices == null || currentDevices.isEmpty())
+            throw new MissingRequestValueException("Cômodo inválido");
+        room.getDevices().remove(device);
+        roomRepository.save(room);
     }
 
     private User findUserByLogin(String userLogin) throws Throwable {

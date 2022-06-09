@@ -31,13 +31,13 @@ public class Room {
     @Nullable
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "room")
     @Nullable
     @Setter
     private List<Device> devices;
 
     @JoinColumn
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @Nullable
     @Setter
     private User user;

@@ -1,5 +1,7 @@
 package br.edu.aluno.projetofinal.device.domain;
 
+import br.edu.aluno.projetofinal.room.domain.Room;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -36,4 +38,10 @@ public class Device {
     @Nullable
     @Setter
     private DeviceType type;
+
+    @Nullable
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Setter
+    @JsonIgnore
+    private Room room;
 }
