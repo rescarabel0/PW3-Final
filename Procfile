@@ -1,1 +1,0 @@
-web: java -jar -Dserver.port=$PORT target/ProjetoFinal-0.0.1.jar

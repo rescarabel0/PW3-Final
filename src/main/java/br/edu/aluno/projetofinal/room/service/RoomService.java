@@ -9,10 +9,10 @@ import java.util.Optional;
 
 public interface RoomService {
     @NonNull
-    Optional<Room> save(@NonNull Room room);
+    Optional<Room> save(@NonNull Room room, @NonNull String userLogin) throws Throwable;
 
     @NonNull
-    List<Room> findAll();
+    List<Room> findAllByUser(@NonNull String userLogin) throws Throwable;
 
     @NonNull
     Optional<Room> findOne(@NonNull Long id);

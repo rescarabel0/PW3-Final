@@ -1,10 +1,13 @@
 package br.edu.aluno.projetofinal.room.controller;
 
+import br.edu.aluno.projetofinal.auth.user.UserAuthentication;
 import br.edu.aluno.projetofinal.device.domain.Device;
 import br.edu.aluno.projetofinal.room.domain.Room;
 import br.edu.aluno.projetofinal.room.service.RoomService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityExistsException;
@@ -25,7 +28,13 @@ public class RoomController {
     @GetMapping({"/", ""})
     @NonNull
     public ResponseEntity<List<Room>> get() {
-        return ResponseEntity.ok(roomService.findAll());
+        var authentication = (UserAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        try {
+            var rooms = roomService.findAllByUser(authentication.getLogin());
+            return ResponseEntity.ok(rooms);
+        } catch (Throwable e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping({"/{id}", "/{id}/"})
@@ -64,10 +73,13 @@ public class RoomController {
     @NonNull
     public ResponseEntity<Room> post(@NonNull @RequestBody Room room) {
         try {
-            var savedRoom = roomService.save(room);
+            var authentication = (UserAuthentication) SecurityContextHolder.getContext().getAuthentication();
+            var savedRoom = roomService.save(room, authentication.getLogin());
             if (savedRoom.isEmpty()) return ResponseEntity.badRequest().build();
             return ResponseEntity.ok(savedRoom.get());
         } catch (EntityExistsException ignored) {
+        } catch (Throwable ignored) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         return ResponseEntity.badRequest().build();
     }

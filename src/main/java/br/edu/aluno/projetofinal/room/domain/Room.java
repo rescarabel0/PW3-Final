@@ -37,7 +37,8 @@ public class Room {
     private List<Device> devices;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @Nullable
+    @Setter
     private User user;
 }
